@@ -14,4 +14,7 @@
 </a>
 @endforeach
 </div>
+<div class="px-24 py-10">
+    {{$products->links()}}
+</div>
 @endsection

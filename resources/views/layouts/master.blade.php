@@ -23,12 +23,12 @@
             $('#message').delay(1500).slideUp(500);
         </script>
         @endif
-        <nav class="flex sticky top-0 justify-between shadow px-20 py-4 items-center bg-orange-500">
+        <nav class="flex sticky top-0 justify-between shadow px-20 py-4 items-center bg-orange-500 z-50">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLIRFzDEmTqyj-31niTj1o48d7O2Zt22oKIg&usqp=CAU" class="w-24" alt="">
 
 
             <form action="{{route('search')}}" method="GET" class="flex-1 w-full px-10 mt-5 flex items-center gap-4">  
-                <input type="text" class="w-full block rounded-lg" placeholder="Search any Product" name="search" value="{{request('search')}}" minlength="2"required>
+                <input type="search" class="w-full block rounded-lg" placeholder="Search any Product" name="search" value="{{request('search')}}" minlength="2"required>
                 <button class="bg-blue-600 text-white px-3 py-2 rounded-lg">Search</button>
             </form>
             
@@ -58,7 +58,7 @@
         @yield('content')
         <footer>
             <div class="bg-blue-800 text-white text-center py-2 ">
-                <p>Copyright &copy; 2023. All rights reserved. SMC Ecommerce</p>
+                <p>Copyright &copy; {{now()->year}}. All rights reserved. Clothing center</p>
             </div>
         </footer>
     </body>

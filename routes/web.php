@@ -37,7 +37,8 @@ Route::post('/order/store', [OrderController::class, 'store'])->middleware('auth
 
 Route::post('/addtocart', [CartController::class, 'store'])->middleware('auth')->name('addtocart');
 
-Route::middleware('auth')->group(function(){
+Route::middleware(['auth','isadmin'])->group(function(){
+
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
 Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
 Route::post('/category/store',[CategoryController::class,'store'])->name('category.store');
@@ -69,7 +70,7 @@ Route::get('/orders',[OrderController::class,'index'])->name('order.index');
 
 
 
-Route::get('/dashboard',[DashboardController:: class,'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[DashboardController:: class,'dashboard'])->middleware(['auth', 'isadmin'])->name('dashboard');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
