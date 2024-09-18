@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -19,23 +20,31 @@ class OrderController extends Controller
         $data['status'] = 'Pending';
         Order::create($data);
         $cart->delete();
-        return redirect('/cart')->with('success', 'Order placed 
-        successfully');
+        return redirect('/cart')->with('success', 'Order placed successfully');
 
     }
+
 
     public function index()
     {
         $orders = Order::all();
-        return view ('order.index',compact('orders'));
+        return view('order.index',compact('orders'));
     }
 
     public function status($id, $status)
     {
         $order = Order::find($id);
-        $order->Status = $status;
+        $order->status = $status;
         $order->save();
-        return redirect()->back()->with('success','Order is now'.$status);
-
+        $data=[
+            'name' => $order->user->name,
+            'status' => $status
+        ];
+        //Mail function
+        Mail::send('emails.ordermail', $data, function ($message) use($order) {
+            $message->to($order->user->email,$order->user->name);
+            $message->subject('Order Status Notification');
+        });
+        return redirect()->back()->with('success', 'Order is now '.$status);
     }
 }
