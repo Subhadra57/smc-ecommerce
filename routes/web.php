@@ -35,6 +35,8 @@ Route::post('/khalti/verify', [KhaltiController::class, 'verify'])->name('khalti
 
 Route::post('/order/store', [OrderController::class, 'store'])->middleware('auth')->name('order.store');
 
+// Route::put('/orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+
 Route::post('/addtocart', [CartController::class, 'store'])->middleware('auth')->name('addtocart');
 
 Route::middleware(['auth','isadmin'])->group(function(){

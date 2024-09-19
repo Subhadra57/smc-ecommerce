@@ -28,9 +28,16 @@
     <tr>
         <td class="border p-2 border-gray-300">{{$category->priority}}</td>
         <td class="border p-2 border-gray-300">{{$category->categoryname}}</td>
+
+        <td class="p-2 border border-gray-300"> {{$category['priority']}} </td>
+        <td class="p-2 border border-gray-300">{{$category['categoryname']}}</td>
+
         <td class="border p-2 border-gray-300">
         <a href="{{route('category.edit',$category->id)}}" class="bg-blue-600 text-white px-2 py-1 rounded mx-1 transition duration-300 ease-in-out hover:bg-green-700">Edit</a>
         <a href="{{route('category.delete',$category->id)}}" onclick="return confirm('Are you sure to delete?');" class="bg-red-600 text-white px-2 py-1 rounded mx-1 transition duration-300 ease-in-out hover:bg-purple-700">Delete</a>
+
+        <a class="px-2 py-1 rounded-lg bg-blue-500 text-white" href="{{route('category.edit',$category['id'])}}">Edit</a>
+        <a class="px-2 py-1 rounded-lg bg-red-500 text-white" href="{{route('category.delete',$category['id'])}}" onclick="return confirm('Are you sure to delete?');">Delete</a>
        
         </td>
     </tr>
